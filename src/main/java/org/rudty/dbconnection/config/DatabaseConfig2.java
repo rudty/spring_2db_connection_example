@@ -20,12 +20,6 @@ import javax.sql.DataSource;
         transactionManagerRef = "transactionManager2")
 public class DatabaseConfig2 {
 
-    private final EntityManagerFactoryBuilder entityManagerFactoryBuilder;
-
-    public DatabaseConfig2(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
-        this.entityManagerFactoryBuilder = entityManagerFactoryBuilder;
-    }
-
     @Bean
     public DataSource dataSource2() {
         return DataSourceBuilder.create()
@@ -35,15 +29,16 @@ public class DatabaseConfig2 {
     }
 
     @Bean(name = "entityManagerFactory2")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory2() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory2(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
         return entityManagerFactoryBuilder.dataSource(dataSource2())
                 .packages("org.rudty.dbconnection.entity2")
                 .build();
     }
 
     @Bean(name = "transactionManager2")
-    PlatformTransactionManager transactionManager2(ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory2().getObject());
+    PlatformTransactionManager transactionManager2(LocalContainerEntityManagerFactoryBean entityManagerFactory2,
+            ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory2.getObject());
         transactionManagerCustomizers.ifAvailable((customizers) -> customizers.customize(transactionManager));
         return transactionManager;
     }

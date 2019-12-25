@@ -21,7 +21,7 @@ public class HelloService {
     // 1. http://localhost:8080/tran
     // 2. http://localhost:8080/h2-console/
     // 3. select * from person2
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional
     public void tran() {
 //        Person1 p1 = new Person1();
 //        p1.age = 1;
@@ -32,7 +32,7 @@ public class HelloService {
         p2.age = 1;
         p2.name = "p";
         person2Repository.save(p2);
-
-        throw new RuntimeException("a");
+        person2Repository.flush();
+//        throw new RuntimeException("a");
     }
 }

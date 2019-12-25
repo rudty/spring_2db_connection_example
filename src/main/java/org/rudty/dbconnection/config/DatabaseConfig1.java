@@ -18,12 +18,6 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(basePackages = "org.rudty.dbconnection.model1")
 public class DatabaseConfig1 {
 
-    private final EntityManagerFactoryBuilder entityManagerFactoryBuilder;
-
-    public DatabaseConfig1(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
-        this.entityManagerFactoryBuilder = entityManagerFactoryBuilder;
-    }
-
     @Bean
     @Primary
     public DataSource dataSource() {
@@ -35,7 +29,7 @@ public class DatabaseConfig1 {
 
     @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
         return entityManagerFactoryBuilder.dataSource(dataSource())
                 .packages("org.rudty.dbconnection.entity1")
                 .build();
@@ -43,8 +37,9 @@ public class DatabaseConfig1 {
 
     @Primary
     @Bean
-    PlatformTransactionManager transactionManager1(ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory().getObject());
+    PlatformTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory,
+            ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory.getObject());
         transactionManagerCustomizers.ifAvailable((customizers) -> customizers.customize(transactionManager));
         return transactionManager;
     }
