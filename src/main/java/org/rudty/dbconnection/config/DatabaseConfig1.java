@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "org.rudty.dbconnection.model1")
+@EnableJpaRepositories(basePackages = "org.rudty.dbconnection.repository1")
 public class DatabaseConfig1 {
 
     @Bean

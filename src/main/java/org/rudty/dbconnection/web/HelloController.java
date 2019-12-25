@@ -1,7 +1,7 @@
 package org.rudty.dbconnection.web;
 
-import org.rudty.dbconnection.model1.Person1Repository;
-import org.rudty.dbconnection.model2.Person2Repository;
+import org.rudty.dbconnection.repository1.Person1Repository;
+import org.rudty.dbconnection.repository2.Person2Repository;
 import org.rudty.dbconnection.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

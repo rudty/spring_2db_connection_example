@@ -1,4 +1,4 @@
-package org.rudty.dbconnection.model1;
+package org.rudty.dbconnection.repository1;
 
 import org.rudty.dbconnection.entity1.Person1;
 import org.springframework.data.jpa.repository.JpaRepository;

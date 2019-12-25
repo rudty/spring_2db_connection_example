@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages="org.rudty.dbconnection.model2",
+        basePackages= "org.rudty.dbconnection.repository2",
         entityManagerFactoryRef = "entityManagerFactory2",
         transactionManagerRef = "transactionManager2")
 public class DatabaseConfig2 {

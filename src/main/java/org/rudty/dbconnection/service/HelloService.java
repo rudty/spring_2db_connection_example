@@ -1,12 +1,10 @@
 package org.rudty.dbconnection.service;
 
-import org.rudty.dbconnection.entity1.Person1;
 import org.rudty.dbconnection.entity2.Person2;
-import org.rudty.dbconnection.model1.Person1Repository;
-import org.rudty.dbconnection.model2.Person2Repository;
+import org.rudty.dbconnection.repository1.Person1Repository;
+import org.rudty.dbconnection.repository2.Person2Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 
