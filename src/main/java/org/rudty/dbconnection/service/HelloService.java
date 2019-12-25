@@ -19,7 +19,7 @@ public class HelloService {
     // 1. http://localhost:8080/tran
     // 2. http://localhost:8080/h2-console/
     // 3. select * from person2
-    @Transactional
+    @Transactional("transactionManager2")
     public void tran() {
 //        Person1 p1 = new Person1();
 //        p1.age = 1;
