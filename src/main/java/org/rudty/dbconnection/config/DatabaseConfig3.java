@@ -14,7 +14,7 @@ public class DatabaseConfig3 {
     public DataSource dataSource3() {
         return DataSourceBuilder.create()
                 .driverClassName("org.h2.Driver")
-                .url("jdbc:h2:~/db3")
+                .url("jdbc:h2:mem:testdb3")
                 .build();
     }
 
