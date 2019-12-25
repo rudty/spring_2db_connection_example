@@ -32,6 +32,7 @@ public class DatabaseConfig1 {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
         return entityManagerFactoryBuilder.dataSource(dataSource())
                 .packages("org.rudty.dbconnection.entity1")
+                .persistenceUnit("1")
                 .build();
     }
 
