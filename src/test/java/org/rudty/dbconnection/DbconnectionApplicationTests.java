@@ -9,6 +9,7 @@ import org.rudty.dbconnection.repository2.Person2Repository;
 import org.rudty.dbconnection.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -39,4 +40,41 @@ class DbconnectionApplicationTests {
 		Assertions.assertEquals(l2.size(), 0);
 	}
 
+	@Transactional
+	@Test
+	void insertPerson1() {
+		Person1 p1 = new Person1();
+		p1.setAge(3);
+		p1.setName("aa");
+
+		person1Repository.saveAndFlush(p1);
+		List<Person1> l1 = person1Repository.findAll();
+
+		Assertions.assertEquals(1, l1.size());
+
+		Person1 firstElem = l1.get(0);
+
+		Assertions.assertEquals(firstElem.getName(), "aa");
+		Assertions.assertEquals(firstElem.getAge(), 3);
+
+	}
+
+	@Transactional("transactionManager2")
+	@Test
+	void insertPerson2() {
+		Person2 p2 = new Person2();
+		p2.setAge(3);
+		p2.setName("aa");
+
+		person2Repository.saveAndFlush(p2);
+		List<Person2> l2 = person2Repository.findAll();
+
+		Assertions.assertEquals(1, l2.size());
+
+		Person2 firstElem = l2.get(0);
+
+		Assertions.assertEquals(firstElem.getName(), "aa");
+		Assertions.assertEquals(firstElem.getAge(), 3);
+
+	}
 }
