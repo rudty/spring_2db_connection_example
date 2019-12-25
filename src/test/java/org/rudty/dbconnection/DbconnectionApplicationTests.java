@@ -25,6 +25,7 @@ class DbconnectionApplicationTests {
 	@Autowired
 	Person2Repository person2Repository;
 
+	@Transactional
 	@Test
 	void contextLoads() {
 		try {
