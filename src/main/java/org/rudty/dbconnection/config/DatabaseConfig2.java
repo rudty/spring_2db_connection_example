@@ -1,6 +1,7 @@
 package org.rudty.dbconnection.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -19,23 +20,31 @@ import javax.sql.DataSource;
         transactionManagerRef = "transactionManager2")
 public class DatabaseConfig2 {
 
+    private final EntityManagerFactoryBuilder entityManagerFactoryBuilder;
+
+    public DatabaseConfig2(EntityManagerFactoryBuilder entityManagerFactoryBuilder) {
+        this.entityManagerFactoryBuilder = entityManagerFactoryBuilder;
+    }
+
     @Bean
     public DataSource dataSource2() {
         return DataSourceBuilder.create()
                 .driverClassName("org.h2.Driver")
-                .url("jdbc:h2:~/db2")
+                .url("jdbc:h2:mem:testdb2")
                 .build();
     }
 
     @Bean(name = "entityManagerFactory2")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory2(EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(dataSource2())
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory2() {
+        return entityManagerFactoryBuilder.dataSource(dataSource2())
                 .packages("org.rudty.dbconnection.entity2")
                 .build();
     }
 
     @Bean(name = "transactionManager2")
-    PlatformTransactionManager transactionManager2(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(entityManagerFactory2(builder).getObject());
+    PlatformTransactionManager transactionManager2(ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory2().getObject());
+        transactionManagerCustomizers.ifAvailable((customizers) -> customizers.customize(transactionManager));
+        return transactionManager;
     }
 }
