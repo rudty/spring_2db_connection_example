@@ -1,5 +1,6 @@
 package org.rudty.dbconnection.service;
 
+import org.rudty.dbconnection.entity1.Person1;
 import org.rudty.dbconnection.entity2.Person2;
 import org.rudty.dbconnection.repository1.Person1Repository;
 import org.rudty.dbconnection.repository2.Person2Repository;
@@ -29,16 +30,15 @@ public class HelloService {
     // 3. select * from person2
     @Transactional("transactionManager2")
     public void tran() {
-//        EntityManager em = entityManagerFactory2.
-//        Person1 p1 = new Person1();
-//        p1.age = 1;
-//        p1.name = "a";
-//        person1Repository.save(p1);
+        Person1 p1 = new Person1();
+        p1.age = 1;
+        p1.name = "a";
+        person1Repository.save(p1);
+
         Person2 p2 = new Person2();
         p2.age = 1;
         p2.name = "p";
         person2Repository.save(p2);
-        person2Repository.flush();
-//        throw new RuntimeException("a");
+        throw new RuntimeException("a");
     }
 }
