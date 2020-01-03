@@ -33,7 +33,7 @@ public class HelloController {
 
     @RequestMapping("/tran")
     public String tran() {
-        helloService.tran();
+        helloService.tranWithException();
         return "";
     }
 }

@@ -26,9 +26,18 @@ class DbconnectionApplicationTests {
 	Person2Repository person2Repository;
 
 	@Test
-	void contextLoads() {
+	void commitTx1AndTx2() {
+		helloService.tranWithCommit();
+		List<Person1> l1 = person1Repository.findAll();
+		List<Person2> l2 = person2Repository.findAll();
+		Assertions.assertEquals(l1.size(), 1);
+		Assertions.assertEquals(l2.size(), 1);
+	}
+
+	@Test
+	void rollbackTx1AndTx2() {
 		try {
-			helloService.tran();
+			helloService.tranWithException();
 		} catch (Exception ignore) {
 		}
 
