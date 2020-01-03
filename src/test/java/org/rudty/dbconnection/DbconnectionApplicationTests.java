@@ -25,23 +25,22 @@ class DbconnectionApplicationTests {
 	@Autowired
 	Person2Repository person2Repository;
 
-	@Transactional
 	@Test
 	void contextLoads() {
 		try {
 			helloService.tran();
 		} catch (Exception ignore) {
-
 		}
 
 		List<Person1> l1 = person1Repository.findAll();
 		List<Person2> l2 = person2Repository.findAll();
-
+		System.out.println(l1.size());
+		System.out.println(l1.size());
 		Assertions.assertEquals(l1.size(), 0);
 		Assertions.assertEquals(l2.size(), 0);
 	}
 
-	@Transactional
+	@Transactional("transactionManager1")
 	@Test
 	void insertPerson1() {
 		Person1 p1 = new Person1();
