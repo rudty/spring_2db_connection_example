@@ -15,3 +15,6 @@
 - 두개 이상의 db 로 transaction 은 [MultipleTransactionConfig](https://github.com/rudty/spring_2db_connection_example/blob/master/src/main/java/org/rudty/dbconnection/config/MultipleTransactionConfig.java) 를 참고하세요.
 - [서비스에서 @Transactional 사용](https://github.com/rudty/spring_2db_connection_example/blob/master/src/main/java/org/rudty/dbconnection/service/HelloService.java)
 - [테스트 바로가기](https://github.com/rudty/spring_2db_connection_example/blob/master/src/test/java/org/rudty/dbconnection/DbconnectionApplicationTests.java)
+
+### 주의사항
+- Datasource 관련 설정을 수정 시에는 Spring 에 내장된 Bean 을 가릴 수 있도록 @Primary 로 선언해야 기대한대로 동작 합니다. [첫번째 db의 설정](https://github.com/rudty/spring_2db_connection_example/blob/master/src/main/java/org/rudty/dbconnection/config/DatabaseConfig1.java) 의 모든 Bean 들은 @Primary 를 삭제하게 된다면 정상적으로 동작하지 않습니다. 
