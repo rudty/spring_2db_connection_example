@@ -29,6 +29,9 @@ public class DatabaseConfig1 {
     @Primary
     @ConfigurationProperties(prefix = "org.rudtyz.db1.datasource")
     public DataSourceProperties datasourceProperties1() {
+        // application.properties 에서 값의 할당은
+        // new 로 생성된 순간이 아니라 반환 후 프레임워크에서 할당됩니다.
+        // 여기에서 추가로 값을 사용하지 마세요
         return new DataSourceProperties();
     }
 
