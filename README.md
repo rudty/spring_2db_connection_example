@@ -1,4 +1,5 @@
 # spring_2db_connection_example
+스프링 에서 여러 개의 데이터베이스 연결 
 
 2020년 1월 현재 [https://start.spring.io](https://start.spring.io) 기본값인 v2.2.2.RELEASE 로 작성했습니다.
 
